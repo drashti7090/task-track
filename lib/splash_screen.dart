@@ -1,10 +1,10 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'home_page.dart';
 import 'login_page.dart';
-
 
 class SplashScreenApi extends StatefulWidget {
   const SplashScreenApi({Key? key}) : super(key: key);
@@ -27,21 +27,21 @@ class _SplashScreenApiState extends State<SplashScreenApi> {
     debugPrint("token:$token");
     Future.delayed(
       const Duration(seconds: 3),
-          () {
+      () {
         if (token == null) {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (context) => const LoginApi(),
               ),
-                  (route) => false);
+              (route) => false);
         } else {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (context) => const HomePageApi(),
               ),
-                  (route) => false);
+              (route) => false);
         }
       },
     );
@@ -82,7 +82,7 @@ class _SplashScreenApiState extends State<SplashScreenApi> {
                 height: 20,
               ),
               const Text(
-                "TASK APP",
+                "TASK TRACK",
                 style: TextStyle(
                   color: Color(0xff103C78),
                   fontSize: 30,

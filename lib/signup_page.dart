@@ -19,7 +19,7 @@ class _SignupApiState extends State<SignupAPi> {
   final emailController = TextEditingController();
   final userController = TextEditingController();
   final passController = TextEditingController();
-  final CpassController = TextEditingController();
+  final cPassController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   bool signupApiProcess = false;
 
@@ -48,7 +48,7 @@ class _SignupApiState extends State<SignupAPi> {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => HomePageApi(),
+                                  builder: (context) => const HomePageApi(),
                                 ),
                                 (route) => false);
                           },
@@ -100,6 +100,7 @@ class _SignupApiState extends State<SignupAPi> {
                           if (value!.isEmpty) {
                             return "Enter username";
                           }
+                          return null;
                         },
                         controller: userController,
                         keyboardType: TextInputType.name,
@@ -151,6 +152,7 @@ class _SignupApiState extends State<SignupAPi> {
                               .hasMatch(value)) {
                             return "enter valid email address";
                           }
+                          return null;
                         },
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -202,10 +204,10 @@ class _SignupApiState extends State<SignupAPi> {
                               .hasMatch(value)) {
                             return "enter valid password\npassword length must be 8 char\nMinimum 1 Upper case\nMinimum 1 lowercase\nMinimum 1 Numeric Number\nMinimum 1 Special Character\nCommon Allow Character ( ! @ # \$ & * ~ )";
                           }
+                          return null;
                         },
                         controller: passController,
                         keyboardType: TextInputType.visiblePassword,
-                        onFieldSubmitted: (value) => print(value),
                         style: const TextStyle(
                             color: Color(0xff103C78),
                             fontWeight: FontWeight.w400,
@@ -257,10 +259,10 @@ class _SignupApiState extends State<SignupAPi> {
                           } else if (value != passController.text) {
                             return "password does not match";
                           }
+                          return null;
                         },
-                        controller: CpassController,
+                        controller: cPassController,
                         keyboardType: TextInputType.visiblePassword,
-                        onFieldSubmitted: (value) => print(value),
                         style: const TextStyle(
                             color: Color(0xff103C78),
                             fontWeight: FontWeight.w400,
@@ -329,8 +331,6 @@ class _SignupApiState extends State<SignupAPi> {
                               setState(() {});
 
                               if (response.statusCode == 200) {
-                                print(
-                                    " ${jsonDecode(response.body)['message']}");
                                 Fluttertoast.showToast(
                                     msg:
                                         "${jsonDecode(response.body)['message']}",
@@ -343,7 +343,7 @@ class _SignupApiState extends State<SignupAPi> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => LoginApi(),
+                                      builder: (context) => const LoginApi(),
                                     ));
                               } else {
                                 print(
@@ -358,8 +358,6 @@ class _SignupApiState extends State<SignupAPi> {
                                     textColor: Colors.white,
                                     fontSize: 16.0);
                               }
-                            } else {
-                              print("Invalid Data");
                             }
                           },
                           child: const Text(
@@ -399,7 +397,8 @@ class _SignupApiState extends State<SignupAPi> {
                                         ));
                                   })
                           ]),
-                    )
+                    ),
+                    const SizedBox(height: 30,)
                   ],
                 ),
               ),

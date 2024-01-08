@@ -55,8 +55,8 @@ class _HomePageApiState extends State<HomePageApi> {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text("LogOut"),
-                          content: Text("Are you sure want to logout?"),
+                          title: const Text("LogOut"),
+                          content: const Text("Are you sure want to logout?"),
                           actions: [
                             TextButton(
                                 onPressed: () async {
@@ -66,22 +66,22 @@ class _HomePageApiState extends State<HomePageApi> {
                                   Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => LoginApi(),
+                                        builder: (context) => const LoginApi(),
                                       ),
                                       (route) => false);
                                 },
-                                child: Text("Yes")),
+                                child: const Text("Yes")),
                             TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: Text("No")),
+                                child: const Text("No")),
                           ],
                         );
                       },
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Logout",
                     style: TextStyle(fontSize: 12, color: Colors.white),
                   ))
@@ -105,13 +105,14 @@ class _HomePageApiState extends State<HomePageApi> {
               children: [
                 ListView.builder(
                   shrinkWrap: true,
-                  padding: EdgeInsets.only(bottom: 20.0, top: 20, left: 20, right: 20),
+                  padding: const EdgeInsets.only(
+                      bottom: 20.0, top: 20, left: 20, right: 20),
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: getData.length,
                   itemBuilder: (context, index) {
                     return Slidable(
                       endActionPane:
-                          ActionPane(motion: ScrollMotion(), children: [
+                          ActionPane(motion: const ScrollMotion(), children: [
                         SlidableAction(
                           onPressed: (context) {
                             showDialog(
@@ -154,62 +155,10 @@ class _HomePageApiState extends State<HomePageApi> {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           color: getData[index]["status"] == true
-                              ? Color(0xff103C78)
+                              ? const Color(0xff103C78)
                               : Colors.blueGrey,
                           borderRadius: BorderRadius.circular(15),
                         ),
-                      /*  child: Row(children: [
-                          Text("${getData[index]["task"]}",
-                              style: TextStyle(
-                                color: getData[index]["status"] == true
-                                    ? Colors.blueGrey
-                                    : Color(0xff103C78),
-                              )),
-                          GestureDetector(
-                              onTap: () {
-                                getData[index]['status'] == true
-                                    ? SizedBox()
-                                    : showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            title: Text("Complete"),
-                                            content: Text(
-                                                "Are you sure want to complete the task?"),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () {
-                                                    *//*getData[index][
-                                                                'status'] = "true";*//*
-                                                    id = getData[index]
-                                                        ['id'];
-                                                    putApi();
-                                                    setState(() {});
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Text("Yes")),
-                                              TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Text("No"))
-                                            ],
-                                          );
-                                        });
-                                setState(() {});
-                              },
-                              child: getData[index]['status'] == true
-                                  ? Icon(
-                                      Icons.check_box,
-                                      color: Colors.blueGrey,
-                                      size: 35,
-                                    )
-                                  : Icon(
-                                      Icons.check_box_outline_blank,
-                                      color: Color(0xff103C78),
-                                      size: 35,
-                                    )),
-                        ]),*/
                         child: Row(
                           children: [
                             const SizedBox(
@@ -220,56 +169,41 @@ class _HomePageApiState extends State<HomePageApi> {
                                   getData[index]['status'] == true
                                       ? const SizedBox()
                                       : showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          title:
-                                          const Text("Complete"),
-                                          content: const Text(
-                                              "Are you sure want to complete the task?"),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () {
-                                                  /*getData[index][
-                                                                    'status'] = "true";*/
-                                                  id = getData[index]
-                                                  ['id'];
-                                                  //i = index;
-                                                  putApi();
-                                                  //getApi();
-                                                  setState(() {});
-                                                  Navigator.pop(
-                                                      context);
-                                                },
-                                                child: const Text(
-                                                    "Yes")),
-                                            TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(
-                                                      context);
-                                                },
-                                                child:
-                                                const Text("No"))
-                                          ],
-                                        );
-                                      });
-
-                                  /*if (taskList[index]['select'] == ""true"") {
-                                          select = "true";
-                                        }*/
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title: const Text("Complete"),
+                                              content: const Text(
+                                                  "Are you sure want to complete the task?"),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      id = getData[index]['id'];
+                                                      putApi();
+                                                      setState(() {});
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: const Text("Yes")),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: const Text("No"))
+                                              ],
+                                            );
+                                          });
                                   setState(() {});
-                                  //debugPrint(taskList[index]);
                                 },
                                 child: getData[index]['status'] == true
                                     ? const Icon(
-                                  Icons.check_box,
-                                  color: Colors.white,
-                                  size: 35,
-                                )
+                                        Icons.check_box,
+                                        color: Colors.white,
+                                        size: 35,
+                                      )
                                     : const Icon(
-                                  Icons.check_box_outline_blank,
-                                  size: 35,
-                                )),
+                                        Icons.check_box_outline_blank,
+                                        size: 35,
+                                      )),
                             const SizedBox(
                               width: 10,
                             ),
@@ -291,13 +225,14 @@ class _HomePageApiState extends State<HomePageApi> {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(bottom: 20.0, top: 20, left: 20, right: 20),
+                  padding: const EdgeInsets.only(
+                      bottom: 20.0, top: 20, left: 20, right: 20),
                   itemCount: getData.length,
                   itemBuilder: (context, index) {
                     return getData[index]["status"] == false
                         ? Slidable(
                             endActionPane: ActionPane(
-                                motion: ScrollMotion(),
+                                motion: const ScrollMotion(),
                                 children: [
                                   SlidableAction(
                                     onPressed: (context) {
@@ -310,8 +245,7 @@ class _HomePageApiState extends State<HomePageApi> {
                                             actions: [
                                               TextButton(
                                                 onPressed: () {
-                                                  id = getData[index]
-                                                  ['id'];
+                                                  id = getData[index]['id'];
                                                   deleteApi();
                                                   Navigator.pop(context);
                                                 },
@@ -329,8 +263,7 @@ class _HomePageApiState extends State<HomePageApi> {
                                         },
                                       );
                                     },
-                                    backgroundColor:
-                                        const Color(0xff103C78),
+                                    backgroundColor: const Color(0xff103C78),
                                     foregroundColor: Colors.white,
                                     icon: Icons.delete,
                                     label: 'Delete',
@@ -343,66 +276,10 @@ class _HomePageApiState extends State<HomePageApi> {
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                 color: getData[index]["status"] == true
-                                    ? Color(0xff103C78)
+                                    ? const Color(0xff103C78)
                                     : Colors.blueGrey,
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                            /*  child: Row(children: [
-                                Text(getData[index]["task"],
-                                    style: TextStyle(
-                                      color:
-                                          getData[index]["status"] == true
-                                              ? Colors.blueGrey
-                                              : Color(0xff103C78),
-                                    )),
-                                GestureDetector(
-                                    onTap: () {
-                                      getData[index]['status'] == true
-                                          ? SizedBox()
-                                          : showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  title: Text("Complete"),
-                                                  content: Text(
-                                                      "Are you sure want to complete the task?"),
-                                                  actions: [
-                                                    TextButton(
-                                                        onPressed: () {
-                                                          *//*getData[index][
-                                                                'status'] = "true";*//*
-                                                          id =
-                                                              getData[index]
-                                                                  ['id'];
-                                                          putApi();
-                                                          setState(() {});
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: Text("Yes")),
-                                                    TextButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: Text("No"))
-                                                  ],
-                                                );
-                                              });
-                                      setState(() {});
-                                    },
-                                    child: getData[index]['status'] == true
-                                        ? Icon(
-                                            Icons.check_box,
-                                            color: Colors.blueGrey,
-                                            size: 35,
-                                          )
-                                        : Icon(
-                                            Icons.check_box_outline_blank,
-                                            color: Color(0xff103C78),
-                                            size: 35,
-                                          )),
-                              ]),*/
                               child: Row(
                                 children: [
                                   const SizedBox(
@@ -411,63 +288,49 @@ class _HomePageApiState extends State<HomePageApi> {
                                   GestureDetector(
                                       onTap: () {
                                         id = getData[index]['id'];
-                                        //i = index;
                                         getData[index]['status'] == true
                                             ? const SizedBox()
                                             : showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                title: const Text(
-                                                    "Complete"),
-                                                content: const Text(
-                                                    "Are you sure want to complete the task?"),
-                                                actions: [
-                                                  TextButton(
-                                                      onPressed: () {
-                                                        /*getData[index][
-                                                                    'status'] = "true";*/
-                                                        putApi();
-                                                        //getApi();
-                                                        setState(
-                                                                () {});
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    title:
+                                                        const Text("Complete"),
+                                                    content: const Text(
+                                                        "Are you sure want to complete the task?"),
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            putApi();
+                                                            setState(() {});
 
-                                                        Navigator.pop(
-                                                            context);
-                                                      },
-                                                      child:
-                                                      const Text(
-                                                          "Yes")),
-                                                  TextButton(
-                                                      onPressed: () {
-                                                        Navigator.pop(
-                                                            context);
-                                                      },
-                                                      child:
-                                                      const Text(
-                                                          "No"))
-                                                ],
-                                              );
-                                            });
-
-                                        /*if (taskList[index]['select'] == ""true"") {
-                                          select = "true";
-                                        }*/
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: const Text(
+                                                              "Yes")),
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child:
+                                                              const Text("No"))
+                                                    ],
+                                                  );
+                                                });
                                         setState(() {});
-                                        //debugPrint(taskList[index]);
                                       },
-                                      child:
-                                      getData[index]['status'] == true
+                                      child: getData[index]['status'] == true
                                           ? const Icon(
-                                        Icons.check_box,
-                                        color: Colors.white,
-                                        size: 35,
-                                      )
+                                              Icons.check_box,
+                                              color: Colors.white,
+                                              size: 35,
+                                            )
                                           : const Icon(
-                                        Icons
-                                            .check_box_outline_blank,
-                                        size: 35,
-                                      )),
+                                              Icons.check_box_outline_blank,
+                                              size: 35,
+                                            )),
                                   const SizedBox(
                                     width: 10,
                                   ),
@@ -475,8 +338,7 @@ class _HomePageApiState extends State<HomePageApi> {
                                     "${getData[index]["description"]}",
                                     style: TextStyle(
                                         fontSize: 12.8,
-                                        color: getData[index]["status"] ==
-                                            true
+                                        color: getData[index]["status"] == true
                                             ? Colors.white
                                             : Colors.black,
                                         fontWeight: FontWeight.w500),
@@ -485,19 +347,20 @@ class _HomePageApiState extends State<HomePageApi> {
                               ),
                             ),
                           )
-                        : SizedBox();
+                        : const SizedBox();
                   },
                 ),
                 ListView.builder(
                   shrinkWrap: true,
-                  padding: EdgeInsets.only(bottom: 20.0, top: 20, left: 20, right: 20),
+                  padding: const EdgeInsets.only(
+                      bottom: 20.0, top: 20, left: 20, right: 20),
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: getData.length,
                   itemBuilder: (context, index) {
                     return getData[index]["status"] == true
                         ? Slidable(
                             endActionPane: ActionPane(
-                                motion: ScrollMotion(),
+                                motion: const ScrollMotion(),
                                 children: [
                                   SlidableAction(
                                     onPressed: (context) {
@@ -510,8 +373,7 @@ class _HomePageApiState extends State<HomePageApi> {
                                             actions: [
                                               TextButton(
                                                 onPressed: () {
-                                                  id = getData[index]
-                                                  ['id'];
+                                                  id = getData[index]['id'];
                                                   deleteApi();
                                                   Navigator.pop(context);
                                                 },
@@ -529,8 +391,7 @@ class _HomePageApiState extends State<HomePageApi> {
                                         },
                                       );
                                     },
-                                    backgroundColor:
-                                        const Color(0xff103C78),
+                                    backgroundColor: const Color(0xff103C78),
                                     foregroundColor: Colors.white,
                                     icon: Icons.delete,
                                     label: 'Delete',
@@ -543,66 +404,10 @@ class _HomePageApiState extends State<HomePageApi> {
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                 color: getData[index]["status"] == true
-                                    ? Color(0xff103C78)
+                                    ? const Color(0xff103C78)
                                     : Colors.blueGrey,
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                           /*   child: Row(children: [
-                                Text("${getData[index]["task"]}",
-                                    style: TextStyle(
-                                      color:
-                                          getData[index]["status"] == true
-                                              ? Colors.blueGrey
-                                              : Color(0xff103C78),
-                                    )),
-                                GestureDetector(
-                                    onTap: () {
-                                      getData[index]['status'] == true
-                                          ? SizedBox()
-                                          : showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  title: Text("Complete"),
-                                                  content: Text(
-                                                      "Are you sure want to complete the task?"),
-                                                  actions: [
-                                                    TextButton(
-                                                        onPressed: () {
-                                                          *//*getData[index][
-                                                                'status'] = "true";*//*
-                                                          id =
-                                                              getData[index]
-                                                                  ['id'];
-                                                          putApi();
-                                                          setState(() {});
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: Text("Yes")),
-                                                    TextButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child: Text("No"))
-                                                  ],
-                                                );
-                                              });
-                                      setState(() {});
-                                    },
-                                    child: getData[index]['status'] == true
-                                        ? Icon(
-                                            Icons.check_box,
-                                            color: Colors.blueGrey,
-                                            size: 35,
-                                          )
-                                        : Icon(
-                                            Icons.check_box_outline_blank,
-                                            color: Color(0xff103C78),
-                                            size: 35,
-                                          )),
-                              ]),*/
                               child: Row(
                                 children: [
                                   const SizedBox(
@@ -611,63 +416,49 @@ class _HomePageApiState extends State<HomePageApi> {
                                   GestureDetector(
                                       onTap: () {
                                         id = getData[index]['id'];
-                                        //i = index;
                                         getData[index]['status'] == true
                                             ? const SizedBox()
                                             : showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return AlertDialog(
-                                                title: const Text(
-                                                    "Complete"),
-                                                content: const Text(
-                                                    "Are you sure want to complete the task?"),
-                                                actions: [
-                                                  TextButton(
-                                                      onPressed: () {
-                                                        /*getData[index][
-                                                                    'status'] = "true";*/
-                                                        putApi();
-                                                        //getApi();
-                                                        setState(
-                                                                () {});
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    title:
+                                                        const Text("Complete"),
+                                                    content: const Text(
+                                                        "Are you sure want to complete the task?"),
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            putApi();
+                                                            setState(() {});
 
-                                                        Navigator.pop(
-                                                            context);
-                                                      },
-                                                      child:
-                                                      const Text(
-                                                          "Yes")),
-                                                  TextButton(
-                                                      onPressed: () {
-                                                        Navigator.pop(
-                                                            context);
-                                                      },
-                                                      child:
-                                                      const Text(
-                                                          "No"))
-                                                ],
-                                              );
-                                            });
-
-                                        /*if (taskList[index]['select'] == ""true"") {
-                                          select = "true";
-                                        }*/
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: const Text(
+                                                              "Yes")),
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child:
+                                                              const Text("No"))
+                                                    ],
+                                                  );
+                                                });
                                         setState(() {});
-                                        //debugPrint(taskList[index]);
                                       },
-                                      child:
-                                      getData[index]['status'] == true
+                                      child: getData[index]['status'] == true
                                           ? const Icon(
-                                        Icons.check_box,
-                                        color: Colors.white,
-                                        size: 35,
-                                      )
+                                              Icons.check_box,
+                                              color: Colors.white,
+                                              size: 35,
+                                            )
                                           : const Icon(
-                                        Icons
-                                            .check_box_outline_blank,
-                                        size: 35,
-                                      )),
+                                              Icons.check_box_outline_blank,
+                                              size: 35,
+                                            )),
                                   const SizedBox(
                                     width: 10,
                                   ),
@@ -675,8 +466,7 @@ class _HomePageApiState extends State<HomePageApi> {
                                     "${getData[index]["description"]}",
                                     style: TextStyle(
                                         fontSize: 12.8,
-                                        color: getData[index]["status"] ==
-                                            true
+                                        color: getData[index]["status"] == true
                                             ? Colors.white
                                             : Colors.black,
                                         fontWeight: FontWeight.w500),
@@ -685,7 +475,7 @@ class _HomePageApiState extends State<HomePageApi> {
                               ),
                             ),
                           )
-                        : SizedBox();
+                        : const SizedBox();
                   },
                 ),
               ],
@@ -701,7 +491,8 @@ class _HomePageApiState extends State<HomePageApi> {
                     return AlertDialog(
                       title: const Text("Task",
                           style: TextStyle(color: Color(0xff103C78))),
-                      backgroundColor: Color(0xff89C2FE).withOpacity(0.90),
+                      backgroundColor:
+                          const Color(0xff89C2FE).withOpacity(0.90),
                       content: Form(
                         key: formKey,
                         child: TextFormField(
@@ -709,6 +500,7 @@ class _HomePageApiState extends State<HomePageApi> {
                             if (value!.isEmpty) {
                               return "Enter name";
                             }
+                            return null;
                           },
                           controller: taskName,
                           keyboardType: TextInputType.emailAddress,
@@ -723,8 +515,8 @@ class _HomePageApiState extends State<HomePageApi> {
                                   borderRadius: BorderRadius.circular(35)),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color:
-                                          Color(0xff103C78).withOpacity(0.60)),
+                                      color: const Color(0xff103C78)
+                                          .withOpacity(0.60)),
                                   borderRadius: BorderRadius.circular(35)),
                               hintText: " please enter task name",
                               hintStyle: const TextStyle(
@@ -776,8 +568,6 @@ class _HomePageApiState extends State<HomePageApi> {
     http.Response response = await http.delete(
         Uri.parse("https://todo-list-app-kpdw.onrender.com/api/tasks/$id"),
         headers: {"x-access-token": "$token"});
-    print("Status Code = ${response.statusCode}");
-    print("Body = ${response.body}");
     if (response.statusCode == 200) {
       getApi();
       Fluttertoast.showToast(
@@ -789,7 +579,6 @@ class _HomePageApiState extends State<HomePageApi> {
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
-      print("Body = ${jsonDecode(response.body)['message']}");
       Fluttertoast.showToast(
           msg: "${jsonDecode(response.body)['message']}",
           toastLength: Toast.LENGTH_SHORT,
@@ -808,9 +597,6 @@ class _HomePageApiState extends State<HomePageApi> {
     http.Response response = await http.get(
         Uri.parse("https://todo-list-app-kpdw.onrender.com/api/tasks"),
         headers: {"x-access-token": "$token"});
-    print("Status Code = ${response.statusCode}");
-    print("Body = ${response.body}");
-    print("Body = ${jsonDecode(response.body)}");
     getData = jsonDecode(response.body);
     if (response.statusCode == 200) {
     } else if (response.statusCode == 401) {
@@ -818,10 +604,9 @@ class _HomePageApiState extends State<HomePageApi> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => LoginApi(),
+            builder: (context) => const LoginApi(),
           ));
     } else {
-      print("Body = ${jsonDecode(response.body)['message']}");
       Fluttertoast.showToast(
           msg: "${jsonDecode(response.body)['message']}",
           toastLength: Toast.LENGTH_SHORT,
@@ -878,8 +663,6 @@ class _HomePageApiState extends State<HomePageApi> {
         headers: {
           "x-access-token": "$token"
         });
-    print("Status Code = ${response.statusCode}");
-    print("Body = ${response.body}");
     if (response.statusCode == 200) {
       //print("Successfully");
       getApi();
@@ -892,7 +675,6 @@ class _HomePageApiState extends State<HomePageApi> {
           textColor: Colors.white,
           fontSize: 16.0);
     } else {
-      print("Body = ${jsonDecode(response.body)['message']}");
       Fluttertoast.showToast(
           msg: "${jsonDecode(response.body)['message']}",
           toastLength: Toast.LENGTH_SHORT,

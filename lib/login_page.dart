@@ -1,10 +1,11 @@
 import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_track/home_page.dart';
-import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:task_track/home_page.dart';
 import 'package:task_track/signup_page.dart';
 
 class LoginApi extends StatefulWidget {
@@ -46,9 +47,9 @@ class _LoginApiState extends State<LoginApi> {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => HomePageApi(),
+                                  builder: (context) => const HomePageApi(),
                                 ),
-                                    (route) => false);
+                                (route) => false);
                           },
                           child: const Text(
                             "Skip",
@@ -110,6 +111,7 @@ class _LoginApiState extends State<LoginApi> {
                           if (value!.isEmpty) {
                             return "Enter username";
                           }
+                          return null;
                         },
                         controller: userController,
                         keyboardType: TextInputType.name,
@@ -120,7 +122,7 @@ class _LoginApiState extends State<LoginApi> {
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
                                 borderSide:
-                                const BorderSide(color: Color(0xff103C78)),
+                                    const BorderSide(color: Color(0xff103C78)),
                                 borderRadius: BorderRadius.circular(35)),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -151,22 +153,21 @@ class _LoginApiState extends State<LoginApi> {
                     ),
                     Padding(
                       padding:
-                      const EdgeInsets.only(top: 10.0, left: 20, right: 20),
+                          const EdgeInsets.only(top: 10.0, left: 20, right: 20),
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Enter password";
                           } else if (!RegExp(
-                              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                                  r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
                               .hasMatch(value)) {
                             return "enter valid password\npassword length must be 8 char\nMinimum 1 Upper case\nMinimum 1 lowercase\nMinimum 1 Numeric Number\nMinimum 1 Special Character\nCommon Allow Character ( ! @ # \$ & * ~ )";
                           }
+                          return null;
                         },
                         controller: passController,
-                        obscureText: tapPass==true?
-                        true:false,
+                        obscureText: tapPass == true ? true : false,
                         keyboardType: TextInputType.visiblePassword,
-                        onFieldSubmitted: (value) => print(value),
                         style: const TextStyle(
                             color: Color(0xff103C78),
                             fontWeight: FontWeight.w400,
@@ -174,11 +175,12 @@ class _LoginApiState extends State<LoginApi> {
                         decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
                                 borderSide:
-                                BorderSide(color: Color(0xff06172d)),
+                                    const BorderSide(color: Color(0xff06172d)),
                                 borderRadius: BorderRadius.circular(35)),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Color(0xffE4E4E4).withOpacity(0.60)),
+                                    color: const Color(0xffE4E4E4)
+                                        .withOpacity(0.60)),
                                 borderRadius: BorderRadius.circular(35)),
                             hintText: "please enter password",
                             hintStyle: const TextStyle(
@@ -192,8 +194,8 @@ class _LoginApiState extends State<LoginApi> {
                                 setState(() {});
                               },
                               child: tapPass == true
-                                  ? Icon(Icons.remove_red_eye)
-                                  : Icon(Icons.remove_red_eye_outlined),
+                                  ? const Icon(Icons.remove_red_eye)
+                                  : const Icon(Icons.remove_red_eye_outlined),
                             )),
                       ),
                     ),
@@ -225,18 +227,12 @@ class _LoginApiState extends State<LoginApi> {
                                     "username": userController.text,
                                     "password": passController.text
                                   });
-                              print("Status Code = ${response.statusCode}");
-                              print("Body = ${response.body}");
-                              print(
-                                  "Body = ${jsonDecode(response.body)['accessToken']}");
-
                               processRun = false;
                               setState(() {});
 
                               if (response.statusCode == 200) {
-                                print(" Login Successfully");
                                 final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
+                                    await SharedPreferences.getInstance();
                                 prefs.setString("token",
                                     "${jsonDecode(response.body)['accessToken']}");
                                 Fluttertoast.showToast(
@@ -250,16 +246,16 @@ class _LoginApiState extends State<LoginApi> {
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => HomePageApi(),
+                                    builder: (context) => const HomePageApi(),
                                   ),
-                                      (route) => false,
+                                  (route) => false,
                                 );
                               } else {
                                 print(
                                     "Body = ${jsonDecode(response.body)['message']}");
                                 Fluttertoast.showToast(
                                     msg:
-                                    "${jsonDecode(response.body)['message']}",
+                                        "${jsonDecode(response.body)['message']}",
                                     toastLength: Toast.LENGTH_SHORT,
                                     gravity: ToastGravity.BOTTOM,
                                     timeInSecForIosWeb: 1,
@@ -301,7 +297,8 @@ class _LoginApiState extends State<LoginApi> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => SignupAPi(),
+                                          builder: (context) =>
+                                              const SignupAPi(),
                                         ));
                                   })
                           ]),
